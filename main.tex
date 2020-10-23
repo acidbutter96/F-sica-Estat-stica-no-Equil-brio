@@ -1,0 +1,606 @@
+\documentclass[25pt]{article}
+\usepackage[portuguese]{babel}
+\usepackage{mathbbol,amsmath,mathptm,mathrsfs,esint,bm}
+\usepackage{amsthm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsfonts}
+\usepackage{graphicx,color}
+\usepackage[top=1cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry}
+\usepackage{sidecap}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage[small,it]{caption}
+\usepackage{caption}
+\usepackage{braket}
+\usepackage{siunitx}
+\usepackage[makeroom]{cancel}
+
+
+\numberwithin{equation}{subsection} %IMPORTANTE
+\DeclareCaptionType{eqsub}[][List of equations]
+\captionsetup[eqsub]{labelformat=empty}
+
+%OPERADORES
+
+\DeclareMathOperator{\sen}{sen}
+\DeclareMathOperator{\I}{i}
+\DeclareMathOperator{\e}{e}
+\DeclareMathOperator{\Div}{div}
+\DeclareMathOperator{\cof}{cof}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\image}{Im}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\tr}{tr}
+
+%theorems
+\newtheorem{lema}{Lema}
+\newtheorem{defi}{Definição}
+\newtheorem{teo}{Teorema}
+\newtheorem{coro}{Corolário}
+\newtheorem{propo}{Proposição}
+\newtheorem{expl}{Exemplo}
+\newtheorem{exc}{Exercício}
+
+%comandos
+
+\newcommand{\lorentzfc}{\mathbf{F}=q\mathbf{v}\times\mathbf{B}}
+\newcommand{\lorentzfcrel}{\mathbf{F}_0=q\mathbf{v}_0\times\mathbf{B}}
+%FISMAT
+\newcommand{\canonicalbasis}{\hat{\mathbf{e}}}
+\newcommand{\Lop}{\mathcal{L}}
+\newcommand{\Amat}{\mathbb{A}}
+\newcommand{\funcdeterminant}{\Delta\left(\ket{e_1},\cdots,\ket{e_n}\right)}
+\newcommand{\somasobrej}{\sum_{j=1}^{n}}
+\newcommand{\somasobre}[1]{\sum_{#1=1}^{n}}
+\newcommand{\kronnecker}[1]{\delta_{#1}}
+\newcommand{\Hermitiano}[1]{#1^{\dagger}}
+\newcommand{\commutador}[2]{\left[#1,#2\right]}
+\newcommand{\levicivita}[1]{\varepsilon_{#1}}
+\DeclareMathOperator{\diag}{diag}
+\newcommand{\Dpartial}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\Oop}{\mathcal{O}}
+\newcommand{\Cop}{\mathcal{C}}
+\newcommand{\Vop}{\mathcal{V}}
+\newcommand{\Uop}{\mathcal{U}}
+\newcommand{\Aa}{\mathbf{A}}
+\newcommand{\vers}[1]{\hat{\mathbf{#1}}}
+\newcommand{\Pp}{\mathbf{P}}
+\newcommand{\Mop}{\mathcal{M}}
+\newcommand{\Bop}{\mathcal{B}}
+\newcommand{\Pop}{\mathcal{P}}
+\newcommand{\OP}[1]{\mathbf{#1}}
+\newcommand{\Rbb}{\mathbb{R}}
+\newcommand{\conjunto}[1]{\left\{#1\right\}}
+\newcommand{\colectkets}[2]{\left\{\ket{#1_{1}},\cdots,\ket{#1_{#2}}\right\}}
+\newcommand{\norma}[1]{\left\|#1\right\|}
+%CLÁSSICA
+\newcommand{\Legendretransf}[3]{F\left(#1,#2\left(#1\right)\right)=#1#2-#3\left(#2\right)}
+\newcommand{\Lagrangeeuler}[3]{\frac{d}{dt}\left(\frac{\partial #1}{\partial \dot{#2}_{#3}}\right)-\frac{\partial #1}{\partial #2_{#3}}=0}
+\newcommand{\poisson}[2]{\left\{#1,#2\right\}}
+\newcommand{\Z}{\tilde{\mathbf{z}}}
+\newcommand{\bz}{\mathbf{z}}
+\newcommand{\Pd}[1]{\partial_{#1}}
+\newcommand{\Pdd}[1]{\partial^2_{#1}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+
+\title{Quinto Semestre}
+\author{Marcos Pereira}
+\date{\today}
+
+\begin{document}
+\maketitle
+\pagebreak
+\tableofcontents
+
+\pagebreak
+
+\section{Introdução}
+
+Modelos gravitacionais bidimensionais surgem naturalmente quando se faz o estudo de ondas gravitacionais e de diversos modelos cosmológicos. Servem também como modelos padrões para o estudo da gravitação 4-dimensional ou superior, resultam da compactação de dimensões maiores para duas. Esses modelos são muito interessantes devido à sua estrutura de integração oculta que permite utilizarmos um número finito de métodos não perturbativos bem definidos para encontrar uma sóliton (onda solitária) como solução não trivial. Esses modelos trazem a possibilidade de realizar a quantização através do método do espalhamento inverso, que é comum na teoria de modelos integráveis. Além disso, tem sido mostrado que na teoria das cordas encontramos claramente a mesma estrutura de integração apresentado pelo modelo gravitacional bidimensional, eles são particularmente interessantes em relação à correspondência AdS/CFT, que afirma que a teoria de cordas bidimensional é uma formulação dual das teorias de calibres em quatro dimensões. A dualidade na AdS/CFT é uma das mais importantes descobertas na física teórica, permitindo o estudo não-perturbativo em teorias de calibres. O estudo das propriedades de integrabilidade em modelos gravitacionais bidimensionais e sua quantização podem nos levar à uma melhor compreensão da quantização das cordas, e sendo assim, nos prover um entendimento não-perturbativo da teorias de calibres, o exemplo mais importante é o Modelo Padrão.
+
+Há algumas características muito específicas no ponto de vista de sistemas integráveis que fazem a teoria gravitacional bidimensional um modelo altamente interessante e não-trivial. A principal característica é chamada não ultralocalidade do modelo integrável. Tais sistemas são os mais importantes e mais difíceis de serem estudados. Exemplos onde há a ocorrência da não ultralocalidade de modelos integráveis são em teoria das cordas, modelo principal do campo quiral, assim como em diversas outras teorias que decorrem de inúmeras áreas da física, como na física da matéria condensada. Um modelo integrável não ultralocal apresenta algumas singularidades na álgebra das matrizes de monodromia – objeto que descreve completamente o modelo e sua estrutura integrável. Apesar de existirem vários métodos para resolver modelos não ultralocais, nenhum deles apresenta uma solução fundamental e a quantização desses modelos continua sendo um problema em aberto, ao contrário dos modelos que apresentam ultralocalidade encontrados na literatura, estes não possuem singularidades e o processo de quantização é bem compreendido e estabelecido. Os exemplos comuns de modelos ultralocais são o XYZ e o modelo de sine-Gordon que frequentemente aparecem na física da matéria condensada. Uma característica bem especifica do modelo gravitacional bidimensional, que resulta da redução dimensional de uma teoria 4-dimensional ou de dimensões superiores de teorias gravitacionais, é a presença do então chamado campo dilaton. Devido ao seu campo, e seu comportamento assintótico, pode ser mostrado que usuais singularidades de sistemas não ultralocais somem, e o resultado é uma estrutura algébrica bem definida que em princípio permitem a quantização. Portanto, mesmo que a gravidade bidimensional seja um modelo não ultralocalmente integrável, o campo dilaton é capaz de reparar as singularidades da teoria.
+
+Por outro lado, houveram desenvolvimentos recentes na quantização de sistemas gerais não ultralocalmente integráveis, os quais não contém campos dilaton. Esses desenvolvimentos são de extrema importância para a teoria das cordas atualmente em comparação com a correspondência AdS/CFT. Para tais sistemas a abordagem mais aceita foi desenvolvida por Maillet, que introduziu o então chamado “processo de simetrização” a fim de lidar com as singularidades que apareciam nas equações que descrevem a integrabilidade. Recentemente, uma explicação mais fundamental e derivação do processo de simetrização dos primeiros princípios foram propostos, consistem em tratar campos quânticos como distribuições de operadores-avaliados. Foi provado que o processo de simetrização de Maillet na teoria clássica provem da necessidade de regularizar produto de operadores que normalmente são mal definidos na teoria quântica. Ademais, baseado nessa abordagem um esquema de quantização foi proposto.
+Nesse projeto propomos estabelecer, para o modelo gravitacional bidimensional, uma conexão entre esse mecanismo de quantização recentemente desenvolvido para qualquer modelo não ultralocal e para campos dilaton que regularizam singularidades e efetivamente reduz a gravidade bidimensional à um sistema bem definido. Um entendimento profundo e tais conexões podem criar novos caminhos para proceder com a quantização de cordas e por sua vez, as teorias de calibres duais.
+
+\pagebreak 
+
+\section{Integrabilidade}
+Um sistema clássico é dito integrável quando pode ser descrito por equações diferenciais lineares, ou, não lineares que possuem solução analítica. A solução pode ser encontrada a partir de passos finitos de operações algébricas e integrações (\textbf{quadratura??}). \begin{flushleft}
+	{\large Objetivos: }\begin{itemize}
+		\item Introdução à integrabilidade clássica no contexto de sistemas dinâmicos.
+		\item Encontrar soluções explicitas das integrais de movimento.
+	\end{itemize}
+\end{flushleft}
+\subsection{Formalismo Hamiltoniano}
+A partir do formalismo Lagrangiano, que consiste no princípio da ação mínima, chegamos ao princípio de Hamilton através da transformada de Legendre da lagrangiana $L$
+\begin{equation}
+L=L\left(\mathbf{q},\frac{d\mathbf{q}}{dt},t\right)\,,
+\end{equation}
+que costuma apresentar-se na forma
+\begin{equation}
+L\left(\mathbf{q},\dot{\mathbf{q}}\right)=T-U\,,
+\end{equation}
+sua transformada de Legendre é dada por
+\begin{displaymath}
+H\left(\mathbf{q},\mathbf{p}\right)=\mathbf{p}\dot{\mathbf{q}}-L\implies \frac{\partial H}{\partial \dot{\mathbf{q}}}=0\,,
+\end{displaymath}
+onde
+\begin{displaymath}
+\frac{\partial L}{\partial \dot{\mathbf{q}}}=\mathbf{p}\,.
+\end{displaymath}
+No formalismo lagrangiano, o desenvolvimento do sistema é uma trajetória contida no espaço de configurações $\mathcal{C}$, esse espaço de configuração possui $\dim \mathcal{C}=n$,
+\begin{displaymath}
+\mathcal{C}=\left(\mathbf{q}\right)\equiv \left\{q_i\right\}_{i=1}^{n}\,,
+\end{displaymath}
+o movimento independe do espaço de configurações, ele é gerado pelas coordenadas generalizadas, a lagrangiana é invariante sob transformações de coordenadas generalizadas. Essa trajetória é única no espaço de configuração e depende das condições de contorno impostas ao sistema.
+\bigbreak
+O desenvolvimento desse mesmo sistema, que possui n graus de liberdade, é descrito no formalismo Hamiltoniano por uma trajetória contida no espaço de fase $\mathcal{F}$ que possui $\dim \mathcal{F}=2n$
+\begin{displaymath}
+\mathcal{F}=\left(\mathbf{p},\mathbf{q}\right)\equiv\left\{f_i\right\}_{i=1}^{2n}\,,
+\end{displaymath}
+a dimensão do espaço de configuração é o dobro da dimensão do espaço de configuração do mesmo sistema, afinal, o princípio Hamiltoniano as variáveis dinâmicas possuem dependência tanto das posições quanto dos momentos conjugados canônicos, ao contrário do Lagrangiano cujas variáveis dinâmicas dependem apenas das coordenadas generalizadas\footnote{Como a velocidade é a derivada temporal da posição, a lagrangiana só depende de $\mathbf{q}$}.
+\bigbreak
+O espaço de fase, pode ser visto \textbf{localmente} como um conjunto aberto de $\mathbb{R}^{2n}$ (tubos de vórtices são conjuntos abertos de $\mathbb{R}^{2n}$?). Globalmente pode ser uma \textbf{variedade topológica não trivial}, como uma esfera ou um toro.
+\bigbreak
+As variáveis dinâmicas (que descrevem o desenvolvimento do sistema são funções) $f:\mathcal{F}\times\mathbb{R}$ $f=f(\mathbf{p},\mathbf{q},t)$, t é um parâmetro denominado tempo que surge devido à uma transformação canônica de evolução temporal\footnote{Como o operador de evolução na mecânica quântica.}. Tomando a derivada total da variável dinâmica $A=A\left(\mathbf{p},\mathbf{q}\right)$ obtém-se os parênteses de Poisson
+\begin{equation}
+\frac{dA}{dt}=\frac{\partial A}{\partial \mathbf{q}}\frac{\partial H}{\partial \mathbf{p}}-\frac{\partial A}{\partial \mathbf{p}}\frac{\partial H}{\partial \mathbf{q}}\equiv\left[A,H\right]
+\end{equation}
+o parênteses de Poisson entre as coordenadas do espaço de fase satisfazem (\textit{relações de comutação canônicas}):
+\begin{align*}
+\left[p_i,p_j\right]=0&&\left[q_i,q_j\right]=0&&\left[p_i,q_j\right]=-\delta_{ij}\,.
+\end{align*}
+Se as variáveis dinâmicas $A$ e $f$ estão em \textbf{involução} a seguinte condição é satisfeita
+\begin{displaymath}
+\poisson{A}{f}=0\,.
+\end{displaymath}
+
+As equações de Hamilton, são obtidas a partir da integral invariante de Poincaré-Cartan\footnote{As integrais invariantes podem ser utilizadas no lugar do Princípio da Ação Mínina para se obter as equações de Hamilton.} no espaço de fase estendido $\mathcal{F}_{e}=\mathcal{F}\times\mathbb{R}$
+\begin{displaymath}
+\oint\limits_{\gamma_1}\mathbf{p}d\mathbf{q}-Hdt=\oint\limits_{\gamma_2}\mathbf{p}d\mathbf{q}-Hdt\,,
+\end{displaymath}
+a condição para que essa igualdade seja satisfeita é
+\begin{align}
+\frac{\partial H}{\partial \mathbf{q}}+\dot{\mathbf{p}}=\frac{\partial H}{\partial \mathbf{p}}-\dot{\mathbf{q}}=\mathbf{0}\,,
+\end{align}
+as 2n equações diferenciais são de primeira ordem, denominadas equações de Hamilton, geram o conjunto solução que é determinado unicamente a partir das condições iniciais impostas ao sistema. O formalismo Hamiltoniano equivale ao Newtoniano, produz as mesmas equações de movimento, porém, possui uma visão mais geométrica da mecânica clássica.
+\bigbreak
+A invariância do volume no espaço de fases também é consequência das equações de Hamilton.
+\begin{defi}
+	Uma variável dinâmica $A=A\left(\mathbf{p},\mathbf{q},t\right)$ é dita carga conservada se $$\dot{A}=0\equiv A\left(\mathbf{p},\mathbf{q}\right)=c,~~c\text{ é constante}\,$$ e se $\mathbf{p},\mathbf{q}$ forem soluções das equações de Hamilton.
+\end{defi}
+\bigbreak
+As equações de Hamilton pode ser resolvido caso haja um número suficiente de cargas conservadas, pois realiza a redução de ordem do sistema.
+\bigbreak
+Uma carga conservada que não possua dependência temporal explicita, define uma hipersuperfície de nível da função $A$ em $\mathcal{F}$. \textbf{Duas cargas conservadas se interceptam em uma superfície bidimensional em }$\mathcal{F}$, e normalmente, a trajetória de um sistema com n graus de liberdade é uma trajetória sobre uma superfície com dimensão $s=2n-L$, com $L$ sendo o número de cargas conservadas (independentes). Para $L=2n-1$, a superfície é uma solução das equações de Hamilton (\textbf{cargas conservadas podem ser vistas como vínculo???}).
+\bigbreak
+Verificou-se desas forma que, encontrar solução das equações de Hamilton equivale a definir uma hipersuperfície dessas, para isto, é preciso a obtenção de um número suficiente de cargas conservadas que não possuam dependência temporal explicita.
+\textbf{A partir da identidade de Jacobi e do fato de que todas integrais de movimento comutam com o hamiltoniano}, podemos utilizar os parênteses de Poisson em relação à duas dadas cargas conservadas para encontrar outras integrais de movimento.
+\bigbreak
+\begin{expl}
+	Dado o hamiltoniano de um sistema com 1 grau de liberdade, o espaço de fase será $\mathcal{F}=\mathbb{R}^2$ e a hamiltoniana pode apresentar a forma
+	\begin{displaymath}
+	H(p,q)=\frac{p^2}{2m}+U(q)
+	\end{displaymath}
+	a hamiltoniana é uma carga conservada, além disso, as equações de Hamilton fornecem
+	\begin{align}
+	\dot{q}=\frac{\partial H}{\partial p}\equiv \frac{p}{m}&&\dot{p}=-\frac{\partial H}{\partial p}\equiv-\frac{\partial U}{\partial q}
+	\end{align}
+	e a hamiltoniana é a constate de movimento $E$ que é a energia total do sistema, que corresponde a uma hipersuperfície. Escrevemos o momento em termo da energia total
+	\begin{equation}
+	p=\pm\sqrt{2m\left[E-U(q)\right]}\,,
+	\end{equation}
+	das equações de Hamilton vem:
+	\begin{align}
+	m\dot{q}=\pm\sqrt{2m\left[E-U(q)\right]}&\implies\int dt=\pm\int \frac{dq}{\sqrt{\frac{2}{m}\left[E-U(q)\right]}}\,.
+	\end{align}
+	Quando possível, resolve-se a equação integral acima e inverte-se a relação de $t$ para $q$, obtendo $q(t)$. Mas isto nem sempre é possível, o sistema porém, continua sendo integrável.
+	
+	Observa-se da integral acima algumas condições impostas para que o sistema seja integrável. Como a condição de que a energia total do sistema é sempre maior que a energia potencial $E>U$.
+\end{expl}
+\subsection{Integrabilidade de Liouville e variáveis ângulo-ação}
+Para se obter a solução das equações de Hamilton, as vezes é suficiente saber $n$ cargas conservadas ao invés de $L$ cargas, pois haverá uma redução de ordem do sistema pela metade. Partindo desse pressuposto, introduziu-se a seguinte definição para sistema integrável.
+\begin{defi}
+	Um sistema integrável consiste de um espaço de fase par, associado à $n$ campos escalares independentes definidas globalmente (siginifica que os gradientes das funções são linearmente independentes no \textbf{espaço tangente} a qualquer ponto em $\mathcal{F}$) $\left\{f_i\right\}_{i=1}^{n}$, esses n campos comutam (estão em involução) $$\poisson{f_i}{f_j}=0,~~j,k=1,2,\cdots,n$$
+\end{defi}
+
+O \textbf{Teorema de Arnold-Liouville permite a verificação de que os sistemas integráveis permitem obter equações de movimento solúveis}.
+\bigbreak
+A transformação canônica univalente de transformação de coordenadas no espaço de fase $$\begin{cases}
+\bz=\left(\mathbf{p},\mathbf{q}\right)\to \Z=\left(\tilde{\mathbf{p}},\tilde{\mathbf{q}}\right)
+\end{cases}$$
+preserva a forma simplética dos parênteses de Poisson
+\begin{align}
+	\poisson{\Z}{H}=\frac{\partial \Z}{\partial \bz}\bm{\omega}\frac{\partial \Z}{\partial \bz}\frac{\partial \tilde{H}}{\partial \Z}=\left[\Z,\Z\right]_{\bz}\frac{\partial \tilde{H}}{\partial \Z}=\bm{\omega}'\frac{\partial \tilde{H}}{\partial \Z}
+\end{align}
+\begin{align}
+\frac{\partial f}{\partial \Z}\bm{\omega}\frac{\partial g}{\partial \Z}&=\frac{\partial f}{\partial \bz}\frac{\partial \bz}{\partial \Z}\bm{\omega}\frac{\partial g}{\partial \bz}\frac{\partial \bz}{\partial \Z}=\frac{\partial f}{\partial \bz}\mathbf{J}\bm{\omega}\mathbf{J}^{T}\frac{\partial g}{\partial \bz}=\frac{\partial f}{\partial \bz}\bm{\omega}'\frac{\partial g}{\partial \bz}
+\end{align}
+portanto
+$$\poisson{f}{g}_{\bz}=\poisson{f}{g}_{\Z}$$
+os parênteses de Poisson são invariantes sob transformações canônicas.
+
+Além disso, se tomarmos uma transformação $\bz\to\Z$ devemos verificar o espaço de fase estendido sob essa transformação.
+
+Com $\gamma$ e $\gamma_0$ sendo duas curvas fechadas de eventos simultâneos no tubo de vórtices, obtemos a partir da integral de Poincaré-Cartan a integral de Poincaré $$\oint\limits_{\gamma}\mathbf{p}d\mathbf{q}-Hdt=\oint\limits_{\gamma_0}\mathbf{p}d\mathbf{q}$$
+se realizarmos uma transformação nas coordenadas da integral
+
+\section{Integrabilidade na Teoria Clássica de Campos}
+Os sistemas tratados na Mecânica Clássica possuem finitos graus de liberdade, portanto estamos trabalhando com uma quantidade finita de cargas conservadas. Para estudar modelos integráveis em TC, precisamos estender o conceito de integrabilidade para sistemas com infinitos graus de liberdade, através do MEIC obtemos um algoritmo para encontrar as soluções dessas equações diferenciais parciais não lineares integráveis.
+\subsection{Estrutura de Poisson}
+
+Considere um espaço de fase $\mathcal{M}$, m-dimensional com coordenadas $\left(z^{1},\cdots,z^{m}\right)$.
+\begin{defi}
+	A matriz simplética $\omega^{ij}=\omega^{ij}(\mathbf{z})$ é chamada \textit{estrutura de Poisson} se há um parêntese de Poisson definido como:
+	\begin{equation}
+	\poisson{f}{g}=\frac{\partial f}{\partial \bz}\bm{\omega}\frac{\partial g}{\partial \bz}
+	\end{equation}
+\end{defi}
+satisfazendo a relação de antissimetria e a identidade de Jacobi. Além disso
+\begin{equation}
+\poisson{z^{i}}{z^{j}}=\omega^{ij}
+\end{equation}
+da identidade de Jacobi obtemos
+\begin{equation}
+\poisson{z^{i}}{\poisson{z^{j}}{z^{k}}}+\poisson{z^{j}}{\poisson{z^{k}}{z^{i}}}+\poisson{z^{k}}{\poisson{z^{i}}{z^{j}}}=0
+\end{equation}
+implica que\footnote{Aqui $\displaystyle \frac{\partial z^\mu}{\partial z^{\nu}}=\delta^{\mu\nu}$}
+\begin{align}
+\omega^{mn}\frac{\partial z^{i}}{\partial z^{m}}\frac{\partial}{\partial z^{n}}\poisson{z^{j}}{z^{k}}+\omega^{mn}\frac{\partial z^{j}}{\partial z^{m}}\frac{\partial}{\partial z^{n}}\poisson{z^{k}}{z^{i}}+\omega^{mn}\frac{\partial z^{k}}{\partial z^{m}}\frac{\partial}{\partial z^{n}}\poisson{z^{i}}{z^{j}}&=0
+\end{align}
+ou seja
+\begin{align}
+\omega^{in}\frac{\partial \omega^{jk}}{\partial z^{n}}+\omega^{jn}\frac{\partial \omega^{ki}}{\partial z^{n}}+\omega^{kn}\frac{\partial\omega^{ij}}{\partial z^{n}}&=0
+\end{align}
+
+\section{A representação de Lax e MEIC}
+
+MEIC baseia-se no problema linear fundamental, certas EDP's de duas variáveis podem ser representadas a partir do sistema de EDO's:
+\begin{equation}\label{PLF}
+\begin{cases}
+\dfrac{\partial \bm{\varPsi}}{\partial x}=\mathbf{L}_{x}\left(x,t;\lambda\right)\bm{\varPsi}\\
+~\\
+\dfrac{\partial \bm{\varPsi}}{\partial t}=\mathbf{L}_{t}\left(x,t;\lambda\right)\bm{\varPsi}
+\end{cases}
+\end{equation}
+$\bm{\varPsi}=\bm{\varPsi}\left(x,t;\lambda\right)$. 
+
+Condição de consistência para \ref{PLF}:
+\begin{align}
+\partial_x\bm{\varPsi}=\mathbf{L}_x\bm{\varPsi}\implies \partial_t\partial_x\bm{\varPsi}&=\partial_t\left(\mathbf{L}_x\bm{\varPsi}\right)\\
+&=\partial_t\mathbf{L}_x\bm{\varPsi}+\mathbf{L}_x\partial_t\bm{\varPsi}=\left(\partial_t\mathbf{L}_x+\mathbf{L}_x\mathbf{L}_t\right)\bm{\varPsi}
+\end{align}
+analogamente
+\begin{align}
+\partial_t\bm{\varPsi}=\mathbf{L}_t\bm{\varPsi}\implies \partial_x\partial_t\bm{\varPsi}&=\partial_x\left(\mathbf{L}_t\bm{\varPsi}\right)\\
+&=\partial_x\mathbf{L}_t\bm{\varPsi}+\mathbf{L}_t\partial_x\bm{\varPsi}=\left(\partial_x\mathbf{L}_t+\mathbf{L}_t\mathbf{L}_x\right)\bm{\varPsi}
+\end{align}
+\begin{equation}
+\boxed{\boxed{\begin{array}{c}
+		\displaystyle \partial_x\partial_t\bm{\varPsi}=\left(\partial_x\mathbf{L}_t+\mathbf{L}_t\mathbf{L}_x\right)\bm{\varPsi}\\
+		\partial_t\partial_x\bm{\varPsi}=\left(\partial_t\mathbf{L}_x+\mathbf{L}_x\mathbf{L}_t\right)\bm{\varPsi}
+		\end{array}}}
+\end{equation}
+portanto
+\begin{align}
+\partial_x\partial_t\bm{\varPsi}-\partial_t\partial_x\bm{\varPsi}=\mathbf{0}
+\end{align}
+afinal
+\begin{equation}
+\varepsilon_{\beta\nu\mu}\partial_\nu\partial_\mu\mathbf{\hat{e}}_{\beta}=0
+\end{equation}
+ou seja
+\color{red}
+\begin{equation}
+\underbrace{d\left(d\bm{\varPsi}\right)=0}_{\text{forma fechada?}}
+\end{equation}
+\color{black}
+e
+\begin{equation}
+\left(\partial_x\partial_t-\partial_t\partial_x\right)\bm{\varPsi}=\left(\partial_x\mathbf{L}_t+\mathbf{L}_t\mathbf{L}_x-\partial_t\mathbf{L}_x-\mathbf{L}_x\mathbf{L}_t\right)\bm{\varPsi}=\left(\partial_x\mathbf{L}_t-\partial_t\mathbf{L}_x\right)\bm{\varPsi}+\commutador{\mathbf{L}_t}{\mathbf{L}_x}\bm{\varPsi}=\mathbf{0}
+\end{equation}
+\begin{equation}
+\boxed{\boxed{\commutador{\mathbf{L}_x}{\mathbf{L}_t}\bm{\varPsi}=\left(\partial_x\mathbf{L}_t-\partial_t\mathbf{L}_x\right)\bm{\varPsi}}}
+\end{equation}
+
+\begin{align}
+\partial_t\left[\left(\partial_x-\mathbf{L}_x\right)\bm{\varPsi}\right]=
+\end{align}
+
+
+\begin{equation}
+\commutador{\partial_x-\mathbf{L}_x}{\partial_t-\mathbf{L}_t}\bm{\varPsi}=\commutador{\mathbf{M}}{\mathbf{N}}=\mathbf{0}
+\end{equation}
+par de operadores diferenciais $$\mathbf{M}:=\partial_x-\mathbf{L}_x,~~~~~\mathbf{N}:=\partial_t-\mathbf{L}_t$$
+é denominado \textbf{par de Lax}.
+
+Condição de curvatura nula
+\begin{equation}
+\partial_x\mathbf{L}_t-\partial_t\mathbf{L}_x+\commutador{\mathbf{L}_t}{\mathbf{L}_x}=\mathbf{0}
+\end{equation}
+para a conexão de Lax $\mathbf{L}_x$. As conexões devem ser escolhidas de forma que tanto a CCN como o par de Lax impliquem que a EDP seja satisfeita para qualquer $\lambda$. Dada a EDP não linear e integrável a conexão de Lax pode adquirir várias formas, mas sempre deve satisfazer a CCN.
+
+Note que a escolha das conexões de Lax resultam na CCN e no par de Lax e dessas devemos obter a equação do modelo original para qualquer parâmetro $\lambda$.
+
+\begin{propo}
+	A CCN é invariante sob transformações de calibre $$\mathbf{L}_{\mu}\to {\mathbf{L}'}_{\mu}=\mathbf{r}\mathbf{L}_{\mu}\mathbf{r}^{-1}+\left(\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}$$
+	com $\mathbf{r}$ sendo uma matriz arbitrária que normalmente depende de variáveis dinâmicas do modelo e do parâmetro espectral $\lambda$.
+\end{propo}
+\begin{proof}
+	Devemos calcular termo a termo os elementos da CCN:
+	\begin{equation}
+	\partial_\nu{\mathbf{L}'}_{\mu}-\partial_\mu{\mathbf{L}'}_{\nu}+\commutador{{\mathbf{L}'}_\mu}{{\mathbf{L}'}_{\nu}}=\mathbf{0}
+	\end{equation}
+	\begin{align}
+	\partial_\nu{\mathbf{L}'}_\mu&=\partial_\nu\left(\mathbf{r}\mathbf{L}_{\mu}\mathbf{r}^{-1}+\left(\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}\right)=\left(\partial_{\nu}\mathbf{r}\right)\mathbf{L}_\mu\mathbf{r}^{-1}+\mathbf{r}\left(\partial_\nu\mathbf{L}_\mu\right)\mathbf{r}^{-1}+\mathbf{r}\mathbf{L}_\mu\partial_\nu\mathbf{r}^{-1}+\left(\partial_\nu\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}+\left(\partial_\mu\mathbf{r}\right)\partial_\nu\mathbf{r}^{-1}\\
+	&=\left(\partial_{\nu}\mathbf{r}\right)\mathbf{L}_\mu\mathbf{r}^{-1}+\mathbf{r}\left(\partial_\nu\mathbf{L}_\mu\right)\mathbf{r}^{-1}-\color{red} \mathbf{r}\left(\mathbf{L}_\mu\mathbf{r}^{-1}\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}+\color{black}\left(\partial_\nu\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}-\color{red}\left(\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}\left(\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}\color{black}
+	\end{align}
+		\begin{align}
+	\partial_\mu{\mathbf{L}'}_\nu&=\partial_\mu\left(\mathbf{r}\mathbf{L}_{\nu}\mathbf{r}^{-1}+\left(\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}\right)=\left(\partial_{\mu}\mathbf{r}\right)\mathbf{L}_\nu\mathbf{r}^{-1}+\mathbf{r}\left(\partial_\mu\mathbf{L}_\nu\right)\mathbf{r}^{-1}+\mathbf{r}\mathbf{L}_\nu\partial_\mu\mathbf{r}^{-1}+\left(\partial_\mu\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}+\left(\partial_\nu\mathbf{r}\right)\partial_\mu\mathbf{r}^{-1}\\
+	&=\left(\partial_{\mu}\mathbf{r}\right)\mathbf{L}_\nu\mathbf{r}^{-1}+\mathbf{r}\left(\partial_\mu\mathbf{L}_\nu\right)\mathbf{r}^{-1}-\color{red} \mathbf{r}\left(\mathbf{L}_\nu\mathbf{r}^{-1}\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}+\color{black}\left(\partial_\mu\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}-\color{red}\left(\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}\left(\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}\color{black}
+	\end{align}
+	\begin{align}
+	\commutador{{\mathbf{L}'}_\nu}{{\mathbf{L}'}_\mu}&=\commutador{\mathbf{r}\mathbf{L}_{\nu}\mathbf{r}^{-1}+\left(\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}}{\mathbf{r}\mathbf{L}_{\mu}\mathbf{r}^{-1}+\left(\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}}\\
+	&=\mathbf{r}\commutador{{\mathbf{L}'}_\nu}{{\mathbf{L}'}_\mu}\mathbf{r}^{-1}+\mathbf{r}\left(\mathbf{L}_\nu\mathbf{r}^{-1}\partial_\mu \mathbf{r}\right)\mathbf{r}^{-1}-\partial_\mu\mathbf{r}\mathbf{L}_\nu\mathbf{r}^{-1}+\partial_\nu\mathbf{r}\mathbf{L}_{\mu}\mathbf{r}^{-1}-\mathbf{r}\left(\mathbf{L}_\mu\mathbf{r}^{-1}\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}\\
+	&+\left(\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}\left(\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}-\left(\partial_\mu\mathbf{r}\right)\mathbf{r}^{-1}\left(\partial_\nu\mathbf{r}\right)\mathbf{r}^{-1}
+	\end{align}
+	implicando que
+	\begin{align}
+	\partial_\nu{\mathbf{L}'}_{\mu}-\partial_\mu{\mathbf{L}'}_{\nu}-\commutador{{\mathbf{L}'}_\nu}{{\mathbf{L}'}_\mu}&=\mathbf{r}\partial_\nu{\mathbf{L}_\mu}\mathbf{r}^{-1}-\mathbf{r}\partial_\mu{\mathbf{L}_\nu}\mathbf{r}^{-1}-\mathbf{r}\commutador{\mathbf{L}_\nu}{{\mathbf{L}'}_\mu}\mathbf{r}^{-1}\\
+	&=\mathbf{r}\left(\partial_\nu{\mathbf{L}_\mu}-\partial_\mu{\mathbf{L}_\nu}-\commutador{\mathbf{L}_\nu}{{\mathbf{L}'}_\mu}\right)\mathbf{r}^{-1}=\mathbf{0}
+	\end{align}
+	foi verificado que a representação da EDP não-linear original, baseada na CCN, é válida para toda classe de conexões equivalentes quando sujeitas à transformações de Calibre.
+\end{proof}
+
+\begin{expl}
+	Par de Lax possível para o modelo NLS é
+	\begin{align*}
+	\mathbf{L}_t&=\frac{\I\lambda^2}{2}\bm{\sigma}_3+\lambda\bm{\Omega}(x)+\bm{\sigma}_3\left(\partial_x\bm{\Omega}(x)+g\varPsi\varPsi^{*}\right)\\
+	\mathbf{L}_x&=-\frac{\I\lambda}{2}\bm{\sigma}_3-\bm{\Omega}(x)
+	\end{align*}
+	com
+	\begin{displaymath}
+	\bm{\sigma}_3=\begin{bmatrix}
+	1&0\\0&-1
+	\end{bmatrix},~~~~~~~~~~~~~~~~~~~,\bm{\Omega}(x)=\begin{bmatrix}
+	0&\I\sqrt{g}\varPsi^{*}(x)\\
+	-\I\sqrt{g}\varPsi(x)&0
+	\end{bmatrix}
+	\end{displaymath}
+	o par de Lax deste exemplo implica na equação NLS ao utilizarmos a CCN
+	\begin{displaymath}
+	\partial_x\mathbf{L}_t-\partial_t\mathbf{L}_x+\commutador{\mathbf{L}_t}{\mathbf{L}_x}=\mathbf{0}
+	\end{displaymath}
+	\begin{align}
+	\partial_x\mathbf{L}_t&=\lambda \partial_x\bm{\Omega}+\bm{\sigma}_3\partial_x^2\bm{\Omega}+\bm{\sigma}_3g\partial_x\left(\varPsi\varPsi^{*}\right)\\
+	\partial_t\mathbf{L}_x&=-\partial_x\bm{\Omega}
+	\end{align}
+	e
+\begin{align}
+\commutador{\OP{L}_t}{\OP{L}_x}&=\OP{L}_t\OP{L}_x-\OP{L}_x\OP{L}_t=\left(\frac{\I\lambda^2}{2}\bm{\sigma}_3+\lambda\bm{\Omega}(x)+\bm{\sigma}_3\left(\partial_x\bm{\Omega}(x)+g\Psi\Psi^{*}\right)\right)\left(
+-\frac{\I\lambda}{2}\bm{\sigma}_3-\bm{\Omega}(x)\right)\\
+&-\left(
+-\frac{\I\lambda}{2}\bm{\sigma}_3-\bm{\Omega}(x)\right)\left(\frac{\I\lambda^2}{2}\bm{\sigma}_3+\lambda\bm{\Omega}(x)+\bm{\sigma}_3\left(\partial_x\bm{\Omega}(x)+g\Psi\Psi^{*}\right)\right)\\
+&=\frac{\lambda^3}{4}\OP{I}+\I\frac{\lambda^2}{2}\bm{\sigma}_3\bm{\Omega}-\I\frac{\lambda^2}{2}\bm{\Omega}\bm{\sigma}_3-\lambda\bm{\Omega}\bm{\Omega}-\I\frac{\lambda}{2}\bm{\sigma}_3\left(\partial_x\bm{\Omega}+g\Psi\Psi^*\right)\bm{\sigma}_3-\bm{\sigma}_3\left(\partial_x\bm{\Omega}+g\Psi\Psi^*\right)\bm{\Omega}\\
+&-\left[\frac{\lambda^3}{4}\OP{I}+\I\frac{\lambda^2}{2}\bm{\Omega}\bm{\sigma}_3-\I\frac{\lambda^2}{2}\bm{\sigma}_3\bm{\Omega}-\lambda\bm{\Omega}\bm{\Omega}-\I\frac{\lambda}{2}\OP{I}\left(\partial_x\bm{\Omega}-g\Psi\Psi^{*}\right)-\bm{\Omega}\bm{\sigma}_3\left(\partial_x\bm{\Omega}+g\Psi\Psi^{*}\right)\right]\\
+&=\I\lambda^2\left[\bm{\sigma}_3\bm{\Omega}-\bm{\Omega}\bm{\sigma}_3\right]+\I\frac{\lambda}{2}\left(\OP{I}+\bm{\Omega}\bm{\sigma}_3\right)\left(\partial_x\bm{\Omega}+g\Psi\Psi^*\right)+\bm{\sigma}_3\left(\partial_x\bm{\Omega}+g\Psi\Psi^*\right)\left(\bm{\Omega}+\bm{\sigma}_3\right)\\
+&\color{red}=^{?}-\frac{\lambda}{2}\left[\bm{\sigma}_3\partial_x\bm{\Omega}\bm{\sigma}_3+\partial_x\bm{\Omega}\right]-\I\bm{\sigma}_3\partial_x\bm{\Omega}\bm{\Omega}+\I\bm{\Omega}\bm{\sigma}_3\partial_x\bm{\Omega}-\I g\Psi\Psi^*\commutador{\bm{\sigma}_3}{\bm{\Omega}}\color{black}
+\end{align}
+então o comutador do par de Lax é
+\begin{align}
+\commutador{\OP{M}}{\OP{L}}&=\commutador{\OP{L}_t-\partial_t}{\OP{L}_x-\partial_x}=\commutador{\OP{L}_t}{\OP{L}_x-\partial_x}-\commutador{\partial_t}{\OP{L}_x-\partial_x}=\commutador{\OP{L}_t}{\OP{L}_x}-\commutador{\OP{L}_t}{\partial_x}-\commutador{\partial_t}{\OP{L}_x}\\
+&=-\frac{\lambda}{2}\left[\bm{\sigma}_3\partial_x\bm{\Omega}\bm{\sigma}_3+\partial_x\bm{\Omega}\right]-\I\bm{\sigma}_3\partial_x\bm{\Omega}\bm{\Omega}+\I\bm{\Omega}\bm{\sigma}_3\partial_x\bm{\Omega}-\I g\Psi\Psi^*\commutador{\bm{\sigma}_3}{\bm{\Omega}}\\
+&\color{red} +\underbrace{\I\left[\bm{\sigma}_3g\left(\partial_x\Psi^{*}\Psi+\Psi^{*}\partial_x\Psi\right)-\bm{\sigma}_3\partial_x\bm{\Omega}\bm{\Omega}+\bm{\Omega}\bm{\sigma}_3\partial_x\bm{\Omega}\right]}_{=0}\nonumber\\
+&\color{red}+\frac{\lambda}{2}\underbrace{\bm{\sigma}_3\partial_x\bm{\Omega}\bm{\sigma}_3+\partial_x\bm{\Omega}}_{=0}\nonumber
+\end{align}
+as seguintes relações foram usadas
+\begin{align*}
+\bm{\sigma}_3\partial_x^2\bm{\Omega}=\begin{bmatrix}
+0&\partial_x^2\Psi^{*}\\
+\partial_x^2\Psi&0
+\end{bmatrix}&&\commutador{\bm{\sigma}_3}{\bm{\Omega}}=2\I\sqrt{g}\begin{bmatrix}
+0&\Psi^*\\
+\Psi&0
+\end{bmatrix}\\
+\bm{\Omega}\partial_x\bm{\Omega}\bm{\Omega}=g\begin{bmatrix}
+\Psi\partial_x\partial^*&0\\
+0&-\Psi^*&\partial_x\Psi
+\end{bmatrix}&&\bm{\Omega}\bm{\sigma}_3\partial_x\bm{\Omega}=-g\begin{bmatrix}
+\Psi^*\partial_x\Psi&0\\
+0&-\Psi\partial_x\Psi^*
+\end{bmatrix}
+\end{align*}
+ou seja, teremos como resultado:
+\begin{align*}
+\commutador{\OP{M}}{\OP{L}}=\I\bm{\sigma}_3\partial_x^2\bm{\Omega}+\partial_t\bm{\Omega}-\I g\Psi\Psi^*\commutador{\bm{\sigma}_3}{\bm{\Omega}}
+\end{align*}
+na versão matricial
+\begin{equation}
+\commutador{\OP{M}}{\OP{L}}=\sqrt{g}\begin{bmatrix}
+0&-\partial_x^2\Psi^*+\I\partial_t\Psi^*+2g\left|\Psi\right|^2\Psi^*\\
+\partial_x^2\Psi-\I\partial_t\Psi+2g\left|\Psi\right|^2\Psi&0
+\end{bmatrix}
+\end{equation}
+devido aos pares de Lax comutarem então encontramos duas equações a partir da matriz do item anterior:
+\begin{align*}
+-\partial_x^2\Psi^*+\I \partial_t\Psi^*+2g\left|\Psi\right|^2\Psi^*&=0\\
+-\partial_x^2\Psi-\I\partial_t\Psi+2g\left|\Psi\right|^2\Psi&=0
+\end{align*}
+\end{expl}
+
+O par de Lax e a CCN são formas equivalentes de representar uma EDP não-linear e integrável bidimensional.
+
+\subsection{Quantidades conservadas}
+
+\subsubsection{Operadores de Transição}
+
+A representação de Lax permite utilizarmos um método canônico para construção de quantidades conservadas. Considere um PLF e um deslocamento de $\bm{\Psi}(x,t;\lambda)$ ao longo da direção $r$ com um $t$ fixo, ou seja, $x_1\to x_2$:
+\begin{equation}
+\bm{\Psi}(x_2,t;\lambda)=\OP{T}\left(x_2,x_1;\lambda\right)\bm{\Psi}\left(x_1,t;\lambda\right)\,.
+\end{equation}
+
+O operador $\OP{T}(x_2,x_1;\lambda)$ é denominado \textit{matriz de transição} ou \textit{operador de translação}, pode ser representado como uma matriz quadrada de posto $l$. Ele é definido no intervalo $\left[x_1,x_2\right]$ a partir das condições:
+
+\begin{align}\label{PLA}
+\left[\Pd{x_2}-\OP{L}_r(x_2,x_1;\lambda)\right]\OP{T}(x_2,x_1;\lambda)=0\\ \OP{T}(x_1,x_1;\lambda)=\mathbb{1}\nonumber
+\end{align}
+
+As condições acima são chamadas de problema linear auxiliar, podem ser obtidas a partir do PLF (\ref{PLF}) da seguinte forma:
+\begin{enumerate}
+\item $\OP{L}_r(x_2)\bm{\Psi}(x_2)=\Pd{x_2}\bm{\Psi}(x_2)$
+\item Lado esquerdo: $\Rightarrow \OP{L}_{x}(x_2)\bm{\Psi}(x_2)=\OP{L}_{x}(x_2)\OP{T}(x_2,x_1)\bm{\Psi}(x_1)$
+\item Lado direito: $\Rightarrow \Pd{x_2}\bm{\Psi}(x_2)
+=\Pd{x_2}\left(\OP{T}(x_2,x_1)\right)\bm{\Psi}(x_1)$
+\end{enumerate}
+ou seja:
+\begin{displaymath}
+\OP{L}_{x}(x_2)\OP{T}(x_2,x_1)\bm{\Psi}(x_1)=\left(\Pd{x_2}\OP{T}(x_2,x_1)\right)\bm{\Psi}(x_1)\implies \left[\Pd{x_2}-\OP{L}_{x}(x_2)\right]\OP{T}(x_2,x_1)=\OP{0}\,.
+\end{displaymath}
+
+Os operadores de transição possuem as seguintes propriedades:
+\begin{enumerate}
+\item \begin{equation}
+\OP{T}(x_1,x_1;\lambda)=\mathbb{1}\implies \bm{\Psi}(x_1,t;\lambda)=\OP{T}(x_1,x_1;\lambda)\bm{\Psi}(x_1,t;\lambda)
+\end{equation}
+\item \begin{equation}
+\OP{T}(x_2,r';\lambda)\OP{T}(x',x_1;\lambda)=\OP{T}(x_2,x_1;\lambda)
+\end{equation}
+\item \begin{equation}
+\OP{T}(x_2,x_1;\lambda)=\OP{T}^{-1}(x_1,x_2;\lambda)\,.
+\end{equation}
+\end{enumerate}
+
+Considere o PLA (\ref{PLA}), levando em consideração que
+\begin{displaymath}
+\sum_{n=1}^{\infty}\frac{1}{n!}\OP{T}^{n}=\e^{\OP{T}}\,,
+\end{displaymath}
+verificamos que essa é uma equação diferencial de operadores
+\begin{displaymath}
+\Pd{x_2}\OP{T}(x_2,x_1)=\OP{L}_{x}(x_2)\,,
+\end{displaymath}
+cuja solução elementar é
+\begin{equation}
+\OP{T}(x_2,x_1;\lambda)=\OP{P}\exp\left(\int\limits_{x_1}^{x_2}dr\OP{L}_{x}(x,t;\lambda)\right)
+\end{equation}
+\color{red} aqui $\OP{P}$ representa o ordenamento por caminho para fatores não comutativos.\color{black}
+
+\subsubsection{Operador P}
+
+Seja $\gamma$ uma curva $$\gamma\in\left[x_1,x_2\right]\,,$$ que foi dividida em $N-1$ partes %colocar figura
+definimos o operador $\OP{P}$ como o seguinte limite:
+\begin{equation}
+\OP{P}\exp\left(\int\limits_{\gamma}dx^{\mu}\OP{L}_{\mu}\right)=\lim_{n\to\infty}\bm{\Omega}_{n}\equiv \lim_{n\to\infty}\prod_{\mu=1}^{n}\OP{L}_{\mu}\,,
+\end{equation}
+o $\bm{\Omega}_{n}$ particiona $\gamma$ em $n$ segmentos adjacentes e os relaciona a cada $\OP{L}$ que atua nesse segmento infinitesimal, ou seja, $\OP{L}_{n}$ representa a expansão em cada trecho infinitesimal
+\begin{equation}
+\OP{L}_{n}=\mathbb{1}+\int\limits_{\gamma_n}dx^{\mu}\OP{L}_{\mu}\,.
+\end{equation}
+
+\begin{defi}[Matriz de monodromia]
+Seja $\commutador{x_1}{x_2}$ é um intervalo completo $\commutador{-L}{L}$ o operador de transição que atua nesse intervalo será:
+\begin{displaymath}
+\OP{T}\left(-L,L\right)\equiv\OP{T}_{L}(\gamma)\,.
+\end{displaymath}
+
+Chamamos esse operador de operador de monodromia (ou matriz de monodromia).
+\end{defi}
+
+\subsubsection{Operador de transição S}
+
+Definimos o operador de transição $\OP{T}$ que desloca $\bm{\Psi}$ no espaço para um $t$ constante, podemos definir um operador análogo que atuará da mesma forma transladando o tempo $t$ para uma coordenada espacial fixa $r$:
+\begin{equation}
+\bm{\Psi}(x,t_2;\lambda)=\OP{S}(t_2,t_1;\lambda)\bm{\Psi}(x,t_1;\lambda)\,,
+\end{equation}
+de forma análoga esse operador pode ser dado como
+\begin{equation}
+\OP{S}(t_2,t_1;\lambda)=\OP{P}\exp\left(\int\limits_{t_1}^{t_2}dt\OP{L}_{t}\left(x,t;\lambda\right)\right)\,.
+\end{equation}
+
+Agora que definimos os dois operadores de transição, é importante notar que:
+\begin{enumerate}
+\item Uma translação arbitrária $\bm{\Omega}_{\gamma}$ da solução do PLF ao longo do plano $t\times r$ pode ser escrita como: $$\bm{\Omega}_{\gamma}=\OP{P}\exp\left(\int\limits_{\gamma}\OP{L}_{x}dr+\OP{L}_{t}dt\right)$$
+\item $\bm{\Omega}_{\gamma}$ é uma expressão para o \color{red} transporte paralelo \color{black} ao longo de uma curva $\gamma$ com a conexão de Lax. Portanto, devido à CCN, a exponencial ordenada por caminhos independe da escolha do caminho. Para uma curva $\beta$ fechada, temos como caso particular:
+$$\bm{\Omega}_{\gamma}=\mathbb{1}$$
+\end{enumerate}
+
+Estamos munidos das informações obtidas para construir as cargas conservadas do sistema, para tanto segue a proposição:
+\begin{propo}
+Considere uma EDP não linear que possui representação de Lax. Se os campos $\bm{\Psi}(x,t;\lambda)$ são periódicos nas coordenadas espaciais e apresentam um período $2L$, então as quantidades
+\begin{equation}
+\varrho(\lambda)=\tr\left(\OP{T}_{L}(t;\lambda)\right)
+\end{equation}
+não possuem dependência temporal. Portanto, o traço do operador de monodromia, $\rho$, é o funcional gerador das quantidades conservadas.
+\end{propo}
+\begin{proof}
+Sabe-se que
+\begin{equation}
+\OP{T}_{L}(\lambda)=\OP{P}\exp\left(\int\limits_{-L}^{L}dx^{\mu}\OP{L}_{\mu}\right)=\lim_{N\to\infty}\prod_{\nu=1}^{n}\OP{L}_{\nu}
+\end{equation}
+portanto têm-se que
+\begin{align}
+\Pd{t}\OP{T}_{L}(\lambda)&=\lim_{N\to\infty}\Pd{t}\prod_{\nu=1}^{N}\OP{L}_{\nu}=\left(\Pd{t}\OP{L}_{N}\right)\OP{L}_{N-1}\cdots \OP{L}_{1}+\cdots \OP{L}_{N}\cdots \OP{L}_{2}\left(\Pd{t}\OP{L}_{1}\right)\\
+&=\cdots+\OP{L}_{N}\OP{L}_{N-1}\left(\int\limits_{\gamma_{N}}dx\Pd{t}\OP{L}_{x}\right)\cdot\cdot\cdot \OP{L}_{2}\OP{L}_{1}+\cdots\\
+&=\int\limits_{-L}^{L}dx\OP{P}\exp\left(\int\limits_{x}^{L}dy\OP{L}_{x}(y,;\lambda)\right)\Pd{t}\OP{L}_{x}\OP{P}\exp\left(\int\limits_{-L}^{x}dz\OP{L}_{x}(z;\lambda)\right)\\
+&\implies \Pd{t}\OP{T}_{L}(\lambda)=\int\limits_{-L}^{L}dx\OP{P}\exp\left(\int\limits_{x}^{L}dy\OP{L}_{s}(y;\lambda)\right)\left(\Pd{x}\OP{L}_{t}-\commutador{\OP{L}_{x}}{\OP{L}_{t}}\right)\OP{P}\exp\left(\int\limits_{-L}^{x}dz\OP{L}_{x}(z;\lambda)\right)\label{estruturafeia}
+\end{align}
+utilizou-se a CCN, e a norma da partição de $\gamma_{n}$ suficientemente pequena.
+
+Têm-se a seguinte relação:
+\begin{equation}
+F(x)=\int\limits_{a(x)}^{b(x)}d\Gamma f(x,\Gamma)\implies \frac{dF}{dx}=\frac{d}{dx}\int\limits_{a(x)}^{b(x)}d\Gamma f(x,\Gamma)=f(x,b(x))b'(x)-f(x,a(x))a'(x)+\int\limits_{a(x)}^{b(x)}\pd{f}{x}d\Gamma
+\end{equation}
+pela relação
+\begin{align}
+\Pd{t}\OP{T}_{L}(\lambda)&=\int\limits_{-L}^{L}dx\Pd{x}\left\{\OP{P}\exp\left[\int\limits_{x}^{L}dy\OP{L}_{x}(y;\lambda)\OP{V}(x,\lambda)\OP{P}\exp\left(\int\limits_{-L}^{x}dz\OP{L}_{x}(z;\lambda)\right)\right]\right\}
+\end{align}
+reestruturamos a equação \ref{estruturafeia}:
+\begin{align}
+\Pd{t}\OP{T}_{L}(\lambda)&=\int_{-L}^{L}dx\Pd{x}\left\{\OP{P}\exp\left[\int\limits_{x}^{L}dy\OP{L}_{x}(y;\lambda)\OP{V}(x,\lambda)\OP{P}\exp\left(\int\limits_{-L}^{x}dz\OP{L}_{x}(z;\lambda)\right)\right]\right\}\\
+&=\left.\OP{P}\exp\left(\int\limits_{x}^{L}dy\OP{L}_{x}\right)\OP{L}_{x}(x,\lambda)\OP{P}\exp\left(\int\limits_{-L}^{x}dz\OP{L}_{x}\left(z;\lambda\right)\right)\right|_{-L}^{L}\\
+&=\OP{V}(L,t;\lambda)\OP{T}_{L}(\lambda)-\OP{T}_{L}(\lambda)\OP{V}(-L,t;\lambda)\,.
+\end{align}
+
+Para esta prova foram considerados campos cuja periodicidade é $2L$ teremos
+\begin{displaymath}
+\OP{V}(L,t;\lambda)=\OP{V}(-L,t;\lambda)\,,
+\end{displaymath}
+portanto
+\begin{equation}
+\Pd{t}\OP{T}_{L}(\lambda)=\commutador{\OP{V}(L,t;\lambda)}{\OP{T}_{L}}
+\end{equation}
+\end{proof}
+\pagebreak
+
+
+\pagebreak
+
+\section{Geometria Diferencial}
+\begin{itemize}
+	\item Introduzir o conceito de variedades, vetores e tensores
+\end{itemize}
+\subsection{Variedade}
+Uma variedade é essencialmente um espaço que é similar (localmente) ao espaço Euclidiano, que pode ser descrito por pontos coordenados. Podemos diferenciar esse tipo de estruturas, porém, não permite a distinção intrínseca entre diferentes sistemas de coordenadas. Portanto, os únicos conceitos definidos pela estrutura de uma variedade são aqueles os quais independam da escolha do sistema de coordenadas.
+\bigbreak
+\subsubsection{Classes de Mapas}
+Seja $\mathbb{R}^{n}$ o espaço Euclidiano n-dimensional, $$\left(x^1,x^2,\cdots,x^n\right),~~x^i\in\mathbb{R}$$ com a topologia usual (conjuntos abertos e fechados são definidos de forma usual), e defina $\frac{1}{2}\mathbb{R}^{n}$ como \textit{lower half} de $\mathbb{R}^{n}$, região de $\mathbb{R}^{n}$ que contém $x^{i}\leq 0$. Um mapa $\phi$ de um conjunto aberto contido no espaço $\mathcal{O}\subset\mathbb{R}^{n}$ (respectivamente o lower half) para um conjunto aberto $\mathcal{O}'\subset \mathbb{R}^{m}$ (respectivamente $\frac{1}{2}\mathbb{R}^{m}$) $$\phi:\mathcal{O}\mapsto\mathcal{O}'$$ é dito um mapa de classe $\mathcal{C}^{r}$ se as coordenadas $\left(x'^1,x'^2,\cdots,x'^m\right)$ da imagem do mapa ($\Oop'$) é contínuo e diferenciável $r$ vezes, todas as derivadas são contínuas e são funções da $n$ coordenadas do conjunto $\mathcal{O}$. Se um mapa é $\mathcal{C}^r$ para todo $r\geq 0$ então $\mathcal{C}^{\infty}$. Um mapa $\mathcal{C}^{0}$ significa que trata-se de um mapa contínuo.
+\subsubsection{Funções e Mapas Lipschitzianos}
+Uma função $f$ de um conjunto aberto $\Oop\subset\Rbb^n$ é dita localmente \textit{Lipschitziana} se para cada conjunto aberto $\Uop\subset\Oop$ com \textbf{cobertura compacta}, então existe alguma constante $k$ tal que para cada par de pontos $p,q\in\Uop$, então
+\begin{equation}
+\left|f(p)-f(q)\right|\leq k\left|p-q\right|\,,
+\end{equation}
+onde $|p|$ denota $$\left\{\left(x^{1}\left(p\right)\right)^2+\left(x^{2}\left(p\right)\right)^2+\cdots+\left(x^{n}\left(p\right)\right)^2\right\}^{\frac{1}{2}}$$.
+
+Um mapa $\phi$ será dito localmente Lipschitziano se as coordenadas de $\phi(p)$ forem funções localmente Lipschitzianas das coordenadas de $p$ e será denotado por $\Cop^{1-}$. De forma similar, devemos dizer que se um mapa $\phi(p)$ é $\Cop^{r-}$ se for $\Cop^{r-1}$ e se as $\left(r-1\right)\text{th}$ derivadas das coordenadas de $\phi(p)$ são funções localmente Lipschitzianas das coordenadas de $p$. Segue que devemos usualmente mencionar $\Cop^{r}$, mas definições e resultados similares são válidos para $\Cop^{r-}$.
+
+Se $\Pop$ é um conjunto arbitrário em $\Rbb^{n}$, um mapa $\phi$ de $\Pop$ para o conjunto $\Pop'\subset\Rbb^{m}$ é dito ser um mapa de classe $\Cop^{r}$ se $\phi$ é a restrição para $\Pop$ e $\Pop'$ de um mapa $\Cop^{r}$ de um conjunto aberto $\Oop$ que contém $\Pop$ a um conjunto aberto $\Oop'$ que contém $\Pop$
+
+\subsubsection{Variedade}
+Uma variedade n-dimensional de classe $\Cop^{r}$ $\Mop$ é um conjunto $\Mop$ em conjunto com um \textit{atlas} de classe $\Cop^{r}$ $$\left\{\Uop_{\alpha},\phi_{\alpha}\right\}\,,$$ ou seja, uma coleção de \textit{cartas} $\left(\Uop_{\alpha},\phi_{\alpha}\right)$ onde $\Uop_{\alpha}$ são subconjuntos da variedade $\Mop$ e $\phi_{\alpha}$ são mapas exclusivos que mapeiam cada $\Uop_{\alpha}$ exclusivamente a um conjunto aberto em $\Rbb^{n}$ tal que
+\begin{enumerate}
+	\item Os subconjuntos $\Uop_{\alpha}$ formam uma cobertura de $\Mop$. $\displaystyle \Mop=\bigcup_{\alpha}\Uop_{\alpha}$,
+	\item E se a intersecção $\Uop_{\alpha}\cap\Uop_{\beta}\neq \emptyset$, então o mapa $$\phi_{\alpha}\odot\phi_{\beta}:\phi_{\beta}\left(\Uop_{\alpha}\cap\Uop_{\beta}\right)\mapsto\phi_{\alpha}\left(\Uop_{\alpha}\cap\Uop_{\beta}\right)$$ é de classe $\Cop^{r}$ de um conjunto aberto de $\Rbb^{n}$ a um conjunto aberto de $\Rbb^{n}$.
+\end{enumerate}
+\end{document}
